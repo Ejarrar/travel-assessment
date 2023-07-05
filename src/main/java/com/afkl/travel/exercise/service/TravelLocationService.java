@@ -9,4 +9,5 @@ public interface TravelLocationService {
     List<TravelLocationDto> getLocations(String language);
 
     TravelLocationDto getLocationByTypeAndCode(String type, String code, String language);
+
 }

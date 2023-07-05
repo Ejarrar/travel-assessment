@@ -1,6 +1,5 @@
 package com.afkl.travel.exercise.config;
 
-import io.micrometer.core.aop.TimedAspect;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Timer;
 import org.modelmapper.ModelMapper;
@@ -17,8 +16,8 @@ public class AppConfig {
 
     @Bean
     public Timer timer(MeterRegistry meterRegistry) {
-        return Timer.builder("myTimer")
-                .description("My Timer")
+        return Timer.builder("travelLocationsTimer")
+                .description("Travel Locations APIs Timer")
                 .register(meterRegistry);
     }
 }

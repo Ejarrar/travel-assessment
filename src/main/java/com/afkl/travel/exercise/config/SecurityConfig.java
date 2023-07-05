@@ -13,8 +13,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**/**")
-                .permitAll();
+                .antMatchers("/v1/locations/**")
+                .hasRole("USER")
+                .and()
+                .authorizeRequests()
+                .antMatchers(("/actuator/metrics/**"))
+                .hasRole("actuator")
+                .and()
+                .httpBasic();
+
+        http.headers().frameOptions().disable();
     }
 
     @Autowired
@@ -29,5 +37,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .password("{noop}psw")
                 .roles("actuator");
     }
-
 }

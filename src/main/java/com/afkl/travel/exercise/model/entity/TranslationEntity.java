@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class TranslationEntity {
 
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name="ID")
         private Long id;
         @Column(name="LOCATION")
@@ -24,6 +24,5 @@ public class TranslationEntity {
         @OneToOne(cascade = CascadeType.ALL)
         @JoinColumn(name = "id", referencedColumnName = "id")
         private LocationEntity locationEntity;
-
 
 }

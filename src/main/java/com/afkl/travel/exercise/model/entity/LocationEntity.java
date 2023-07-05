@@ -3,6 +3,7 @@ package com.afkl.travel.exercise.model.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -10,7 +11,7 @@ import javax.persistence.*;
 public class LocationEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="ID")
     private Long id;
     @Column(name="CODE")
@@ -21,12 +22,10 @@ public class LocationEntity {
     private Double latitude;
     @Column(name="LONGITUDE")
     private Double longitude;
-    @Column(name="PARENT_ID")
-    private Integer parentCode;
-    @Column(name="PARENT_TYPE")
-    private String parentType;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "location_id", referencedColumnName = "id")
-    private TranslationEntity translation;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id", referencedColumnName = "id")
+    private LocationEntity parentId;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "location", referencedColumnName = "id")
+    private Set<TranslationEntity> translation;
 }
